@@ -1,0 +1,15 @@
+{
+    "manifest_version": 2,
+    "name": "NinjaManager Extension",
+    "version": "1.0",
+    "description": "A Chrome extension for NinjaManager battles.",
+    "permissions": [
+        "activeTab"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["*://www.ninjamanager.com/*"],
+            "js": ["content.js"]
+        }
+    ]
+}
