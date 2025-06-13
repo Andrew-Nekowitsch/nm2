@@ -21,6 +21,38 @@ const toggleFriendChallengeErrors = () => {
 }
 
 
+const challengeFriends = (friends) => {
+    if (!friends) {
+        console.error('Friends list not found');
+        return;
+    }
+    const friend = friends.getElementsByClassName('-color-yes')[0];
+    if (friend) {
+        friend.click();
+    }
+}
+const challengeReturn = () => {
+    const returnButtons = document.getElementsByClassName('-icon-challenge-return');
+    if (!returnButtons || returnButtons.length === 0) {
+        console.error('No challenges to return');
+        return;
+    }
+
+    const challengeButton = returnButtons[0];
+    if (challengeButton) {
+        challengeButton.click();
+    }
+}
+
+
+const qKeyHandler = () => {
+    const friends = document.getElementById('friends-list');
+    if (friends) {
+        challengeFriends(friends);
+    } else {
+        challengeReturn();
+    }
+}
 const rKeyHandler = () => {
     let retryButton = document.getElementsByClassName('pm-battle-buttons__retry')[0];
     if (retryButton) {
@@ -39,9 +71,7 @@ const fKeyHandler = () => {
         finishButton.click();
     }
 }
-const spaceKeyHandler = (e) => {
-    e.preventDefault(); 
-    e.stopPropagation();
+const spaceKeyHandler = () => {
     let closeButton = document.getElementsByClassName('c-overlay-message__close')[0];
     if (closeButton) {
         closeButton.click();
@@ -49,13 +79,26 @@ const spaceKeyHandler = (e) => {
 }
 
 document.addEventListener('keypress', function (e) {
-    if (e.key === 'r' || e.key === 'R') {
-        rKeyHandler();
-    } else if (e.key === 's' || e.key === 'S') {
-        sKeyHandler();
-    } else if (e.key === 'f' || e.key === 'F') {
-        fKeyHandler();
-    } else if (e.key === ' ' || e.key === 'Space') {
-        spaceKeyHandler(e);
-    }
+    e.preventDefault();
+    e.stopPropagation();
+
+    const key = e.key.toLowerCase();
+    const keyHandler = keyFactory(key);
+    keyHandler(e);
 });
+
+const handlers = {
+    'q': qKeyHandler,
+    'r': rKeyHandler,
+    's': sKeyHandler,
+    'f': fKeyHandler,
+    ' ': spaceKeyHandler
+}
+
+const keyFactory = (key) => {
+    return (e) => {
+        if (e.key === key || e.key === key.toUpperCase()) {
+            handlers[key.toLowerCase()]();
+        }
+    };
+}

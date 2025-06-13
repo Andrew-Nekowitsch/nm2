@@ -1,0 +1,40 @@
+import type { Item, TableItem } from '../models/Item';
+
+export function castItemsToTableItems(items: Item[]): TableItem[] {
+    return items.map(item => ({
+        id: item.id,
+        name: item.name,
+        tai: item.stats.tai,
+        nin: item.stats.nin,
+        buki: item.stats.buki,
+        sta: item.stats.sta,
+        gen: item.stats.gen,
+        ele: item.stats.ele,
+        crit: item.stats.crit,
+        reroll: item.stats.reroll,
+        atk: item.stats.atk,
+        wind_damage: item.extra_stats.wind_damage,
+        water_damage: item.extra_stats.water_damage,
+        fire_damage: item.extra_stats.fire_damage,
+        earth_damage: item.extra_stats.earth_damage,
+        lightning_damage: item.extra_stats.lightning_damage,
+        poison: item.extra_stats.poison,
+        critical_chance: item.extra_stats.critical_chance,
+        itemfind: item.extra_stats.itemfind,
+        experience: item.extra_stats.experience,
+        gold: item.extra_stats.gold,
+        focus_burst: item.extra_stats.focus_burst,
+        genjutsu_absorb: item.extra_stats.genjutsu_absorb,
+        genjutsu_activation: item.extra_stats.genjutsu_activation,
+        bukijutsu_recovery: item.extra_stats.bukijutsu_recovery,
+        bukijutsu_boost: item.extra_stats.bukijutsu_boost,
+        bukijutsu_max_recovery: item.extra_stats.bukijutsu_max_recovery,
+        bloodline_exp: item.extra_stats.bloodline_exp,
+        lightning_element: item.extra_stats.lightning_element,
+        wind_element: item.extra_stats.wind_element,
+        tai_guard: item.extra_stats.tai_guard,
+        nin_absorb: item.extra_stats.nin_absorb,
+        death: item.extra_stats.death,
+        taijutsu_immunity: item.extra_stats.taijutsu_immunity
+    }));
+}
