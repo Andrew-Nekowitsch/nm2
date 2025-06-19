@@ -38,9 +38,10 @@ const challengeReturn = () => {
         return;
     }
 
-    const challengeButton = returnButtons[0];
-    if (challengeButton) {
-        challengeButton.click();
+    const randomIndex = Math.floor(Math.random() * returnButtons.length);
+    const returnButton = returnButtons[randomIndex];
+    if (returnButton) {
+        returnButton.click();
     }
 }
 
